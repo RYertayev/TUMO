@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2-3 этаж · Расписание</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F5F4F0;
+  --surface: #FFFFFF;
+  --border: #E4E2DA;
+  --border-subtle: #EDEBE4;
+  --text-primary: #1C1C1E;
+  --text-secondary: #6B6B6B;
+  --text-muted: #A8A8A8;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+  --radius: 12px;
+  --radius-sm: 8px;
+
+  /* Unified event palette */
+  --ev-raid:        #2563EB; /* Pre Piscine Raids */
+  --ev-leet:        #7C3AED; /* LeetCode */
+  --ev-mentor-h:    #D97706; /* Mentor Hours */
+  --ev-mentor-l:    #B45309; /* Mentor Lecture */
+  --ev-student:     #0891B2; /* Student Lecture */
+  --ev-internal:    #059669; /* Internal Lecture */
+  --ev-free:        #D1D5DB; /* Free time */
+  --ev-aiml:        #4F46E5; /* AI/ML */
+  --ev-aiml-hours:  #6366F1; /* AI/ML Office Hours */
+  --ev-js:          #CA8A04; /* JS Club */
+  --ev-go:          #0E7490; /* Golang Club */
+  --ev-react:       #EA580C; /* React Club */
+  --ev-soft:        #DB2777; /* Soft Skills */
+  --ev-guide:       #4338CA; /* Guide Club */
+  --ev-music:       #9333EA; /* Music */
+  --ev-gamedev:     #7C2D12; /* GameDev */
+  --ev-english:     #15803D; /* English Club */
+  --ev-debate:      #C2410C; /* Debate */
+  --ev-asian:       #BE185D; /* Asian Culture */
+  --ev-social:      #A16207; /* Social Media */
+  --ev-analysis:    #047857; /* Analysis */
+  --ev-book:        #6D28D9; /* Book Club */
+  --ev-board:       #0F766E; /* Board Games */
+  --ev-movie:       #1D4ED8; /* Movie Club */
+  --ev-strategic:   #475569; /* Strategic Games */
+  --ev-mandatory:   #B91C1C; /* Mandatory Audits */
+  --ev-corp:        #0369A1; /* Corporate Training */
+  --ev-meetup:      #7E22CE; /* Meet up */
+  --ev-zone:        #64748B; /* Zone learning */
+  --ev-checkin:     #EA580C; /* Check-in */
+  --ev-guest:       #E11D48; /* Guest lecture */
+  --ev-kazakh:      #0284C7; /* Kazakh Speaking */
+  --ev-digest:      #0D9488; /* Digest */
+  --ev-dsa:         #9333EA; /* DSA Club */
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Manrope',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text-primary);
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+
+/* ── Header ── */
+header{
+  padding:10px 20px;
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-shrink:0;
+  z-index:10;
+}
+.header-left{}
+.header-title{font-size:16px;font-weight:800;color:var(--text-primary);letter-spacing:-.2px}
+.header-sub{font-size:11px;color:var(--text-muted);font-weight:500;margin-top:1px}
+.legend-bar{display:flex;gap:16px;align-items:center}
+.leg{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-secondary);font-weight:600}
+.leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* ── Layout ── */
+.main{display:flex;flex:1;overflow:hidden}
+.map-panel{overflow-y: auto; width:54%;display:flex;flex-direction:column;border-right:1px solid var(--border);background:#FAFAF7}
+.map-inner{flex:1;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.map-inner img.floorplan{max-width:100%;max-height:100%;object-fit:contain;display:block;pointer-events:none;user-select:none}
+.map-svg-overlay{position:absolute;inset:0;width:100%;height:100%}
+.zone-group{cursor:pointer}
+.zone-group:hover .zone-circle{filter:brightness(1.08) drop-shadow(0 0 10px rgba(0,0,0,.3))!important}
+.zone-group.active .zone-circle{filter:brightness(1.12) drop-shadow(0 0 14px rgba(0,0,0,.4))!important}
+.zone-tag{pointer-events:none;text-anchor:middle;dominant-baseline:hanging;font-size:11px;font-weight:700;fill:var(--text-primary);paint-order:stroke;stroke:#fff;stroke-width:3.5px;stroke-linejoin:round}
+.map-hint{padding:5px 14px;font-size:10px;color:var(--text-muted);text-align:center;flex-shrink:0;background:#FAFAF7;border-top:1px solid var(--border-subtle);font-weight:500}
+
+/* ── Schedule panel ── */
+.sched-panel{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.sched-head{
+  padding:14px 18px 12px;
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  flex-shrink:0;
+}
+.shead-top{display:flex;align-items:center;gap:11px;margin-bottom:6px}
+.zbadge{
+  width:15px;height:15px;border-radius:50%;
+  flex-shrink:0;background:#ddd;
+  transition:background .2s;
+  box-shadow:0 1px 4px rgba(0,0,0,.15);
+}
+.zname{font-size:16px;font-weight:800;color:var(--text-primary);letter-spacing:-.2px}
+.zdesc{font-size:11.5px;color:var(--text-muted);margin-top:2px;font-weight:500}
+
+/* June note */
+.june-note{
+  display:none;
+  margin-top:9px;
+  padding:8px 12px;
+  background:#EFF6FF;
+  border:1px solid #BFDBFE;
+  border-radius:var(--radius-sm);
+  font-size:11px;
+  color:#1D4ED8;
+  font-weight:600;
+  gap:6px;
+  align-items:flex-start;
+}
+.june-note.visible{display:flex}
+.june-note-icon{font-size:13px;flex-shrink:0;margin-top:-.5px}
+
+.zone-info{display:none;gap:10px;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--border-subtle)}
+.zone-info.visible{display:flex}
+.photo-strip{display:flex;gap:5px;flex-shrink:0}
+.photo-box{
+  width:72px;height:54px;border-radius:7px;overflow:hidden;
+  border:1px solid var(--border);flex-shrink:0;
+  background:#F0EDE5;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:transform .15s,box-shadow .15s;
+}
+.photo-box:hover{transform:scale(1.04);box-shadow:var(--shadow-md)}
+.photo-box img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-box svg{opacity:.3}
+.seats-badge{
+  display:flex;align-items:center;gap:5px;
+  font-size:11.5px;color:var(--text-secondary);
+  white-space:nowrap;padding:5px 10px;
+  background:#F9F8F5;border-radius:20px;
+  border:1px solid var(--border);font-weight:600;
+}
+.seats-badge strong{color:var(--text-primary);font-size:13px}
+
+/* ── Week grid ── */
+.sched-body{flex:1;overflow-y:auto;padding:14px 16px 16px;display:flex;flex-direction:column;gap:12px}
+
+.wg{
+  display:grid;
+  grid-template-columns:52px repeat(5,minmax(0,1fr));
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:var(--surface);
+  flex-shrink:0;
+  box-shadow:var(--shadow-sm);
+}
+
+.gh{
+  padding:8px 2px;
+  text-align:center;
+  font-size:10.5px;
+  font-weight:700;
+  color:#374151;
+  background:#F7F6F2;
+  border-bottom:1px solid var(--border);
+  letter-spacing:.4px;
+  text-transform:uppercase;
+}
+.tc{background:#F7F6F2}
+
+.ts{
+  height:38px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-end;
+  padding:4px 8px 0 0;
+  font-size:12px;
+  font-weight:600;
+  color:#9CA3AF;
+  border-bottom:1px solid var(--border-subtle);
+  position:relative;
+}
+.ts:last-child{border-bottom:none}
+
+.dc{position:relative;border-left:1px solid var(--border)}
+.sl{height:38px;border-bottom:1px solid var(--border-subtle);position:relative}
+.sl:last-child{border-bottom:none}
+
+.ev{
+  position:absolute;
+  left:3px;right:3px;
+  border-radius:5px;
+  padding:4px 7px;
+  overflow:hidden;
+  z-index:1;
+  transition:filter .15s,transform .12s;
+}
+.ev:hover{filter:brightness(.93);transform:scaleX(.96)}
+.ev-n{font-size:9.5px;font-weight:700;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ev-t{font-size:8px;opacity:.8;margin-top:2px;font-weight:500}
+
+/* ── Legend cards ── */
+.legend-section-title{
+  font-size:10.5px;font-weight:700;
+  color:var(--text-muted);
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+.legend-cards{display:grid;grid-template-columns:1fr 1fr;gap:7px;flex-shrink:0}
+.lc{
+  display:flex;align-items:flex-start;gap:8px;
+  background:var(--surface);
+  border:1px solid var(--border-subtle);
+  border-radius:var(--radius-sm);
+  padding:8px 10px;
+  box-shadow:var(--shadow-sm);
+}
+.lc-dot{
+  width:10px;height:10px;border-radius:50%;
+  flex-shrink:0;margin-top:3px;
+}
+.lc-name{font-size:11px;font-weight:700;color:var(--text-primary);line-height:1.3}
+.lc-desc{font-size:10px;color:var(--text-muted);margin-top:2px;line-height:1.4;font-weight:500}
+
+/* ── Empty state ── */
+.empty-state{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:8px;
+  color:var(--text-muted);font-size:12px;padding:40px 0;font-weight:500;
+}
+.empty-state svg{opacity:.35}
+
+/* ── Lightbox ── */
+.lb-backdrop{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,0);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:background .22s,opacity .22s;
+}
+.lb-backdrop.open{background:rgba(0,0,0,.75);opacity:1;pointer-events:auto}
+.lb-box{position:relative;max-width:82vw;max-height:80vh;display:flex;flex-direction:column;align-items:center;gap:12px}
+.lb-img-wrap{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  background:#111;max-width:100%;max-height:72vh;
+  display:flex;align-items:center;justify-content:center;
+}
+.lb-img-wrap img{max-width:80vw;max-height:68vh;object-fit:contain;display:block;border-radius:var(--radius)}
+.lb-placeholder{width:320px;height:240px;display:flex;align-items:center;justify-content:center;color:#555;font-size:13px;border-radius:var(--radius);background:#1a1a1a}
+.lb-close{
+  position:absolute;top:-14px;right:-14px;
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);
+  color:#fff;font-size:18px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:background .15s;
+}
+.lb-close:hover{background:rgba(255,255,255,.3)}
+.lb-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,.13);border:1.5px solid rgba(255,255,255,.25);
+  color:#fff;font-size:20px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:background .15s;user-select:none;
+}
+.lb-arrow:hover{background:rgba(255,255,255,.28)}
+.lb-arrow.prev{left:-52px}
+.lb-arrow.next{right:-52px}
+.lb-arrow.hidden{opacity:0;pointer-events:none}
+.lb-dots{display:flex;gap:6px}
+.lb-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.35);transition:background .15s;cursor:pointer}
+.lb-dot.active{background:#fff}
+.lb-counter{color:rgba(255,255,255,.5);font-size:11px;font-weight:500}
+
+.floor-label{
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:#C96FA8;
+  color: #fff;
+  padding:6px 10px;
+  border-radius:8px;
+  font-size:20px;
+  font-weight:700;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  z-index:10;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="header-sub">TUMO Astana · 2-3 этаж</div>
+    <div class="header-title">Карта и расписание</div>
+  </div>
+  <div class="legend-bar">
+    <div class="leg"><div class="leg-dot" style="background:#3B82F6"></div>InfoDesk</div>
+    <div class="leg"><div class="leg-dot" style="background:#C96FA8"></div>Workshop room</div>
+    <div class="leg"><div class="leg-dot" style="background:#ffff0f"></div>Self Learning zone</div>
+    <div class="leg"><div class="leg-dot" style="background:#06B6D4"></div>Сafeteria</div>
+  </div>
+</header>
+
+<div class="main">
+  <div class="map-panel">
+
+  <div class="maps-scroll">
+    <!-- ПЕРВАЯ КАРТА -->
+    <div class="map-inner">
+      <div class="floor-label">2 этаж</div>
+      <img class="floorplan"
+        src="https://raw.githubusercontent.com/RYertayev/TUMO/main/2%20%D1%8D%D1%82%20%D1%81%20%D0%B3%D1%80%D0%B0%D0%B4%D0%B8%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%B1%D0%BE%D1%80%D0%B4%D0%B5%D1%80%D0%BE%D0%BC.jpg">
+      <svg class="map-svg-overlay" viewBox="0 0 2000 1979">
+        <g id="zg"></g>
+      </svg>
+    </div>
+
+    <!-- ВТОРАЯ КАРТА -->
+    <div class="map-inner">
+      <div class="floor-label">3 этаж</div>
+      <img class="floorplan"
+        src="https://raw.githubusercontent.com/RYertayev/TUMO/main/3%20%D1%8D%D1%82%20%D1%81%20%D0%B3%D1%80%D0%B0%D0%B4%D0%B8%D0%B5%D0%BD%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%B1%D0%BE%D1%80%D0%B4%D0%B5%D1%80%D0%BE%D0%BC.jpg">
+      <svg class="map-svg-overlay" viewBox="0 0 2000 1979">
+        <g id="zg2"></g>
+      </svg>
+    </div>
+  </div>
+</div>
+  
+
+  <div class="sched-panel">
+    <div class="sched-head">
+      <div class="shead-top">
+        <div class="zbadge" id="zbadge"></div>
+        <div>
+          <div class="zname" id="zname">Выберите зону</div>
+          <div class="zdesc" id="zdesc">Нажмите на выделенную область на карте</div>
+        </div>
+      </div>
+      <div class="june-note" id="juneNote">
+        <span class="june-note-icon">📅</span>
+        <span>В июне здесь будет проходить учебная практика для студентов.</span>
+      </div>
+      <div class="zone-info" id="zinfo">
+        <div class="photo-strip" id="zPhotos"></div>
+        <div class="seats-badge" id="zSeatsBadge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Мест: <strong id="zSeats"></strong>
+        </div>
+      </div>
+    </div>
+    <div class="sched-body" id="sbody">
+      <div class="empty-state">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Выберите зону на карте
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lb-backdrop" id="lb">
+  <div class="lb-box">
+    <div class="lb-img-wrap" id="lbWrap">
+      <button class="lb-close" id="lbClose" title="Закрыть">✕</button>
+      <button class="lb-arrow prev" id="lbPrev">&#8249;</button>
+      <button class="lb-arrow next" id="lbNext">&#8250;</button>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+      <div class="lb-dots" id="lbDots"></div>
+      <div class="lb-counter" id="lbCounter"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+
+// ── Unified event color map (consistent across ALL zones) ──
+const EVT_MAP = [
+  { keys:["Рейды Pre Piscine","Pre Piscine GO","Pre Piscine"],  bg:"#2563EB", tx:"#fff" },
+  { keys:["LeetCode"],                                           bg:"#7C3AED", tx:"#fff" },
+  { keys:["Mentor Hours"],                                        bg:"#D97706", tx:"#fff" },
+  { keys:["Mentor Lecture"],                                     bg:"#B45309", tx:"#fff" },
+  { keys:["Mentor Session"],                                     bg:"#B45309", tx:"#fff" },
+  { keys:["Внутренняя лекция"],                      bg:"#0891B2", tx:"#fff" },
+  { keys:["Внутренняя лекция"],                                  bg:"#059669", tx:"#fff" },
+  { keys:["Free time","Свободное"],                              bg:"#D1D5DB", tx:"#374151" },
+  { keys:["Воркшоп","Воркшопы"],                                 bg:"#0369A1", tx:"#fff" },
+  { keys:["Check-In"],                                           bg:"#EA580C", tx:"#fff" },
+  { keys:["Meet up"],                                            bg:"#7E22CE", tx:"#fff" },
+  { keys:["Гостевая"],                                           bg:"#E11D48", tx:"#fff" },
+  { keys:["AI/ML","Office Hours AI","Часы работы AI"],           bg:"#4F46E5", tx:"#fff" },
+  { keys:["Office Hours"],                                       bg:"#4F46E5", tx:"#fff" },
+  { keys:["Лекции по AI"],                                       bg:"#4F46E5", tx:"#fff" },
+  { keys:["JavaScript Club"],                                    bg:"#CA8A04", tx:"#fff" },
+  { keys:["Golang Club"],                                        bg:"#0E7490", tx:"#fff" },
+  { keys:["React Club"],                                         bg:"#EA580C", tx:"#fff" },
+  { keys:["Soft Skills"],                                        bg:"#DB2777", tx:"#fff" },
+  { keys:["Guide Club"],                                         bg:"#4338CA", tx:"#fff" },
+  { keys:["Music Room","Music Jam"],                             bg:"#9333EA", tx:"#fff" },
+  { keys:["GameDev"],                                            bg:"#92400E", tx:"#fff" },
+  { keys:["English Club"],                                       bg:"#15803D", tx:"#fff" },
+  { keys:["Debate Club"],                                        bg:"#C2410C", tx:"#fff" },
+  { keys:["Asian Culture"],                                      bg:"#BE185D", tx:"#fff" },
+  { keys:["Social Media"],                                       bg:"#A16207", tx:"#fff" },
+  { keys:["Analysis Club"],                                      bg:"#047857", tx:"#fff" },
+  { keys:["Book Club"],                                          bg:"#6D28D9", tx:"#fff" },
+  { keys:["Board Games"],                                        bg:"#0F766E", tx:"#fff" },
+  { keys:["Киноклуб","Movie Club"],                              bg:"#1D4ED8", tx:"#fff" },
+  { keys:["Strategic Games"],                                    bg:"#475569", tx:"#fff" },
+  { keys:["Mandatory"],                                          bg:"#B91C1C", tx:"#fff" },
+  { keys:["Корпоративное"],                                      bg:"#0369A1", tx:"#fff" },
+  { keys:["Зона обучения"],                                      bg:"#64748B", tx:"#fff" },
+  { keys:["Kazakh Public","Казах"],                              bg:"#0284C7", tx:"#fff" },
+  { keys:["Лекция Pre Piscine"],                                 bg:"#2563EB", tx:"#fff" },
+  { keys:["Собрание старост"],                                   bg:"#1D4ED8", tx:"#fff" },
+  { keys:["Дайджест","Digest"],                                  bg:"#0D9488", tx:"#fff" },
+  { keys:["DSA","структур данных"],                              bg:"#9333EA", tx:"#fff" },
+];
+
+function getColor(n) {
+  for (const row of EVT_MAP)
+    for (const k of row.keys)
+      if (n.includes(k)) return { bg: row.bg, tx: row.tx };
+  return { bg:"#E5E7EB", tx:"#374151" };
+}
+
+// ── Event descriptions ──
+const EVT_DESC = {
+  "Mentor Hours":                   "Консультационные часы, где менторы работают со своими менти: помогают с обучением, разбирают сложные темы и отвечают на вопросы. Доступны в дневное и вечернее время — на выбор для работающих и неработающих студентов.",
+  "Mentor Lecture":                "Лекции от менторов по ключевым темам программирования и AI с разбором практических кейсов.",
+  "Mentor Session":                "Консультационные часы: менторы помогают ментам с обучением, разбирают проблемы и решают вопросы.",
+  "JavaScript Club":               "Студенческий клуб по основам веб-разработки: HTML, CSS и JS для создания сайтов и проектов.",
+  "Golang Club":                   "Студенческий клуб по основам программирования и разработки на Go.",
+  "Воркшопы по AI/ML":             "Обязательные практические занятия по AI и ML для первых трёх когорт, с разбором кейсов и выполнением заданий.",
+  "Лекции по AI/ML":               "Обязательные теоретические занятия по AI и ML для первых трёх когорт, с разбором кейсов и демонстрацией практических решений.",
+  "Movie Club":                    "Студенческий клуб по просмотру и совместному обсуждению фильмов.",
+  "Собрание старост":              "Встреча старост для обсуждения вопросов студентов и координации клубов.",
+  "Free time":                     "Свободное время для самостоятельного обучения и работы над проектами.",
+  "Внутренняя лекция":             "Лекции от студентов для студентов: обмен опытом, разбор проектов и публичные выступления.",
+  "Office Hours AI/ML":            "Консультационные часы по AI/ML: разбор вопросов и сложных тем с наставниками.",
+  "Корпоративное обучение":        "Обучение между коллегами по разным темам для профессионального и технического развития.",
+  "English Club":                  "Студенческий клуб по изучению английского языка через интерактивные форматы.",
+  "LeetCode":                      "Трёхмесячный челлендж по программированию среди студентов: ежедневные тренировки по алгоритмам и структурам данных.",
+  "Зона обучения для Core":        "Зона для самостоятельной работы студентов Core обучения",
+  "Зона обучения для Piscine":     "Зона для самостоятельной работы студентов Piscine.",
+  "Pre-Piscine GO":                "Двухмесячный курс, где люди без бэкграунда могут подготовиться к бассейну по Go.",
+  "Лекция Pre Piscine GO":         "Двухмесячный теоретический курс для участников без опыта программирования, направленный на освоение базовых концепций и синтаксиса Go в формате лекций.",
+  "Воркшоп Pre Piscine GO":        "Практические занятия для закрепления знаний, отработки синтаксиса и выполнения упражнений на Go, предназначенные для участников без опыта программирования.",
+  "Рейды Pre Piscine":             "Ревью проектов студентов Pre Piscine от coding-менторов с совместным разбором задач и ускорением прогресса.",
+  "AI Club Practicum":             "Студенческий клуб по применению Python для анализа данных и превращению «сырых» данных в понятные выводы.",
+  "Analysis Club":                 "Студенческий клуб по бизнес-анализу и изучению бизнес-процессов.",
+  "Asian Culture Club":            "Активное сообщество участников, заинтересованных в изучении азиатской культуры.",
+  "Peer-to-peer разборы":          "Совместный разбор заданий и проектов студентами с взаимной проверкой и обучением друг друга.",
+  "GameDev Club":                  "Студенческий клуб ценителей видеоигровой индустрии: обсуждение и изучение игр.",
+  "Debate Club":                   "Студенческий клуб, направленный на развитие критического мышления.",
+  "Strategic Games Tutorials":     "Обучение настольным играм: шахматы, го, гомоку, рэндзю.",
+  "Music Jam Club":                "Студенческий клуб для музыкального творчества и совместных джем-сессий.",
+  "Social Media Club":             "Студенческий клуб, посвящённый обсуждению преимуществ и недостатков использования социальных сетей.",
+  "Soft Skills Club":              "Cтуденческий клуб, где участники разыгрывают разнообразные кейсы и развивают ключевые софт-скиллы.",
+  "React Club":                    "Студенческий клуб по изучению основ React с нуля.",
+  "Kazakh Public Speaking":        "Обучение мастерству публичных выступлений на казахском языке.",
+  "Guide Club":                    "Студенческий клуб с лайфхаками, разбором задач по Golang, IT-инструментам и обсуждением технологий Big Tech компаний.",
+  "Тематические турниры":          "Неформальные соревнования для нетворкинга, вовлечения и укрепления комьюнити.",
+  "Music Room":                    "Пространство для студентов, увлекающихся игрой на музыкальных инструментах, созданное для творческого самовыражения.",
+  "Mandatory FullStack Audits Room": "Пространство для обязательной проверки проектов студентов по направлению FullStack.",
+  "Mandatory AI Audits Room":      "Пространство для обязательной проверки проектов студентов по направлению AI.",
+  "Гостевая лекция": "Выступление приглашенного профильного эксперта, направленное на передачу практического опыта, кейсов и актуальных рыночных компетенций учащимся.",
+  "Check-In ивент": "Мероприятие для приветствия новых студентов, презентации школы, знакомства с программой обучения, открывающее новый поток обучения.",
+  "Meet up для новых студентов Core": "Организационное собрание для учащихся основного этапа обучения (Core), посвященное детальному разбору учебного плана, правил взаимодействия и методологии образовательного процесса.",
+  "Office Hours AI/ML": "Консультационные часы по AI/ML: разбор вопросов и сложных тем с наставниками.",
+  "Дайджест новостей в сфере IT и AI": "Еженедельный регулярный обзор актуальных новостей, трендов и технологий в индустрии от студентов.",
+  "Data Structures and Algorithms Club": "Студенческий клуб по изучению структур данных и алгоритмов.",
+  "Book Club": "Студенческий клуб по совместному чтению и обсуждению книг.",
+  "Board Games Club": "Студенческий клуб по настольным играм для развития стратегического мышления и командного взаимодействия.",
+};
+
+function getDesc(n) {
+  for (const [k, v] of Object.entries(EVT_DESC))
+    if (n.includes(k) || k.includes(n)) return v;
+  return "";
+}
+
+const ZONES = {
+  self_zone: {
+    name: "Self Learning Zone", shortName: "Self-Learning Zone", type: "self_zone", color: "#ffff0f",
+    cx:1700, cy:1300, r:46, seats:24, juneNote:false,
+    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/amfi1.jpg","https://raw.githubusercontent.com/nargizskakova-04/g/main/amfi2.jpg","https://raw.githubusercontent.com/nargizskakova-04/g/main/amfi3.jpg"],
+    events:[
+      {d:0,s:10,e:18,n:"Self Learning Time"},
+      {d:1,s:10,e:18,n:"Self Learning Time"},
+      {d:3,s:10,e:18,n:"Self Learning Time"},
+      {d:4,s:10,e:18,n:"Self Learning Time"},
+    ]
+  },
+  self_zone2: {
+    name: "Self Learning Zone", shortName: "Self-Learning Zone", type: "self_zone", color: "#ffff0f",
+    cx:1200, cy:1400, r:46, seats:24, juneNote:false,
+    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/amfi1.jpg","https://raw.githubusercontent.com/nargizskakova-04/g/main/amfi2.jpg","https://raw.githubusercontent.com/nargizskakova-04/g/main/amfi3.jpg"],
+    events:[
+      {d:0,s:10,e:18,n:"Self Learning Time"},
+      {d:1,s:10,e:18,n:"Self Learning Time"},
+      {d:3,s:10,e:18,n:"Self Learning Time"},
+      {d:4,s:10,e:18,n:"Self Learning Time"},
+    ]
+  },
+  comp1: {
+    name:"Robotics room 1", shortName:"Robotics WS", type:"comp", color:"#C96FA8",
+    cx:1450, cy:400, r:38, seats:16, juneNote:true,
+    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/comp1.jpg"],
+    events:[
+      {d:0,s:10,e:18,n:"Зона обучения для робототехники"},
+      {d:1,s:10,e:18,n:"Зона обучения для робототехники"},
+      {d:3,s:10,e:18,n:"Зона обучения для робототехники"},
+      {d:4,s:10,e:18,n:"Зона обучения для робототехники"},
+    ]
+  },
+  InfoDesk: {
+    name:"InfoDesk", shortName:"InfoDesk", type:"meet", color:"#3B82F6",
+    cx:1000, cy:600, r:34, seats:10, juneNote:false,
+    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/meet4.06.jpg"],
+    events:[
+      {d:0,s:10, e:18,n:"InfoDesk"},
+      {d:1,s:10, e:18,n:"InfoDesk"},
+      {d:3,s:10, e:18,n:"InfoDesk"},
+      {d:4,s:10, e:18,n:"InfoDesk"},
+    ]
+  },
+  cafe1: {
+    name:"Cafeteria", shortName:"Cafeteria", type:"cafe", color:"#3B82F6",
+    cx:600, cy:1570, r:34, seats:10, juneNote:false,
+    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/meet4.04.jpg"],
+    events: [
+      {d: 0, s: 10, e: 18, n: "Cafeteria"},
+      {d: 1, s: 10, e: 18, n: "Cafeteria"},
+      {d: 3, s: 10, e: 18, n: "Cafeteria"},
+      {d: 4, s: 10, e: 18, n: "Cafeteria"},
+    ]
+  },
+  
+  comp2: {
+    name:"Musical Studio", shortName:"Mus. Studio", type:"music", color:"#06B6D4",
+    cx:519, cy:651, r:34, seats:12, juneNote:false,
+    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/conf1.jpg","https://raw.githubusercontent.com/nargizskakova-04/g/main/conf2.jpg"],
+    events: [
+      {d: 0, s: 10, e: 18, n: "Musical Club"},
+      {d: 1, s: 10, e: 18, n: "Musical Club"},
+      {d: 3, s: 10, e: 18, n: "Musical Club"},
+      {d: 4, s: 10, e: 18, n: "Musical Club"},
+    ]
+  },
+  wardrobe: {
+    name:"Wardrobe room", shortName:"Wardrobe", type:"wardrobe", color:"#06B6D4",
+    cx:650, cy:651, r:34,  juneNote:false,
+    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/conf1.jpg","https://raw.githubusercontent.com/nargizskakova-04/g/main/conf2.jpg"],
+    events: [
+      {d: 0, s: 10, e: 18, n: "Wardrobe"},
+      {d: 1, s: 10, e: 18, n: "Wardrobe"},
+      {d: 3, s: 10, e: 18, n: "Wardrobe"},
+      {d: 4, s: 10, e: 18, n: "Wardrobe"},
+    ]
+  },
+  comp3: {
+    name:"Robotics room 1", shortName:"Robotics WS", type:"comp", color:"#C96FA8",
+    cx:1450, cy:2450, r:38, seats:16, juneNote:true,
+    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/comp1.jpg"],
+    events:[
+      {d:0,s:10,e:18,n:"Зона обучения для робототехники"},
+      {d:1,s:10,e:18,n:"Зона обучения для робототехники"},
+      {d:3,s:10,e:18,n:"Зона обучения для робототехники"},
+      {d:4,s:10,e:18,n:"Зона обучения для робототехники"},
+    ]
+  }
+};
+
+const HS=9, HE=21, SH=38, DAYS=["Пн","Вт","Ср","Чт","Пт"];
+const zg = document.getElementById("zg");
+let activeG = null, curId = null;
+const PLACEHOLDER_SVG = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.3"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="m21 15-5-5L5 19"/></svg>`;
+
+const ICONS = {self_zone:"🧠", comp:"💻", meet:"📋", conf:"📋", music: " 𝄞", cafe: "🍽️", wardrobe: "🧥"};
+
+Object.entries(ZONES).forEach(([id, z]) => {
+  const g = document.createElementNS("http://www.w3.org/2000/svg","g");
+  g.classList.add("zone-group");
+
+  const shadow = document.createElementNS("http://www.w3.org/2000/svg","circle");
+  shadow.setAttribute("cx",z.cx+2); shadow.setAttribute("cy",z.cy+3);
+  shadow.setAttribute("r",z.r+2); shadow.setAttribute("fill","rgba(0,0,0,0.14)");
+  g.appendChild(shadow);
+
+  const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+  c.classList.add("zone-circle");
+  c.setAttribute("cx",z.cx); c.setAttribute("cy",z.cy);
+  c.setAttribute("r",z.r); c.setAttribute("fill",z.color);
+  c.setAttribute("stroke","#fff"); c.setAttribute("stroke-width","3");
+  c.setAttribute("opacity","0.93");
+  g.appendChild(c);
+
+  const ico = document.createElementNS("http://www.w3.org/2000/svg","text");
+  ico.setAttribute("x",z.cx); ico.setAttribute("y",z.cy+1);
+  ico.setAttribute("text-anchor","middle"); ico.setAttribute("dominant-baseline","middle");
+  ico.style.fontSize = (z.r*0.68)+"px"; ico.style.pointerEvents="none";
+  ico.textContent = ICONS[z.type]||"●";
+  g.appendChild(ico);
+
+  const lbl = document.createElementNS("http://www.w3.org/2000/svg","text");
+  lbl.classList.add("zone-tag");
+  lbl.setAttribute("x",z.cx); lbl.setAttribute("y",z.cy+z.r+6);
+  const words = z.shortName.split(" ");
+  if(words.length<=2){ lbl.textContent=z.shortName; lbl.style.fontSize="11px"; }
+  else {
+    const ts1=document.createElementNS("http://www.w3.org/2000/svg","tspan");
+    ts1.setAttribute("x",z.cx); ts1.setAttribute("dy","0"); ts1.textContent=words.slice(0,2).join(" ");
+    const ts2=document.createElementNS("http://www.w3.org/2000/svg","tspan");
+    ts2.setAttribute("x",z.cx); ts2.setAttribute("dy","13"); ts2.textContent=words.slice(2).join(" ");
+    lbl.appendChild(ts1); lbl.appendChild(ts2); lbl.style.fontSize="11px";
+  }
+  g.appendChild(lbl);
+
+  const hit = document.createElementNS("http://www.w3.org/2000/svg","rect");
+  hit.setAttribute("x",z.cx-z.r-30); hit.setAttribute("y",z.cy-z.r-5);
+  hit.setAttribute("width",z.r*2+60); hit.setAttribute("height",z.r*2+55);
+  hit.setAttribute("fill","transparent");
+  g.insertBefore(hit,shadow);
+
+  g.addEventListener("click",()=>{
+    if(activeG) activeG.classList.remove("active");
+    activeG=g; g.classList.add("active");
+    curId=id; renderSchedule();
+  });
+  zg.appendChild(g);
+});
+
+function renderSchedule() {
+  if(!curId) return;
+  const z = ZONES[curId];
+  document.getElementById("zname").textContent = z.name;
+  document.getElementById("zdesc").textContent = z.events.length ? z.events.length+" событий на неделе" : "Нет событий на этой неделе";
+  document.getElementById("zbadge").style.background = z.color;
+
+  // June note
+  const juneNote = document.getElementById("juneNote");
+  if(z.juneNote) juneNote.classList.add("visible");
+  else juneNote.classList.remove("visible");
+
+  const strip = document.getElementById("zPhotos");
+  strip.innerHTML = "";
+  (z.photos||[]).forEach((src,idx) => {
+    const box = document.createElement("div");
+    box.className = "photo-box";
+    const img = document.createElement("img");
+    img.src = src; img.alt = "";
+    img.onerror = () => { box.innerHTML = PLACEHOLDER_SVG; box.onclick = null; };
+    box.appendChild(img);
+    box.addEventListener("click", () => openLightbox(z.photos, idx));
+    strip.appendChild(box);
+  });
+
+  document.getElementById("zSeats").textContent = z.seats ?? "—";
+  document.getElementById("zinfo").classList.add("visible");
+
+  const body = document.getElementById("sbody");
+  body.innerHTML = "";
+
+  // Grid
+  const grid = document.createElement("div"); grid.className="wg";
+  const corner = document.createElement("div"); corner.className="gh tc"; grid.appendChild(corner);
+  DAYS.forEach(d=>{
+    const h=document.createElement("div"); h.className="gh"; h.textContent=d; grid.appendChild(h);
+  });
+
+  const tc = document.createElement("div"); tc.className="tc";
+  for(let h=HS;h<HE;h++){
+    const s=document.createElement("div"); s.className="ts"; s.textContent=h+":00"; tc.appendChild(s);
+  }
+  grid.appendChild(tc);
+
+  for(let di=0;di<5;di++){
+    const col=document.createElement("div"); col.className="dc";
+    for(let h=HS;h<HE;h++){
+      const s=document.createElement("div"); s.className="sl"; col.appendChild(s);
+    }
+    z.events.filter(e=>e.d===di).forEach(ev=>{
+      const top=(ev.s-HS)*SH+2, height=(ev.e-ev.s)*SH-4, c2=getColor(ev.n);
+      const el=document.createElement("div"); el.className="ev";
+      el.style.cssText=`top:${top}px;height:${height}px;background:${c2.bg}`;
+      el.innerHTML=`<div class="ev-n" style="color:${c2.tx}">${ev.n}</div><div class="ev-t" style="color:${c2.tx}">${ev.s}:00–${ev.e}:00</div>`;
+      col.appendChild(el);
+    });
+    grid.appendChild(col);
+  }
+  body.appendChild(grid);
+
+  // Legend cards
+  const names = [...new Set(z.events.map(e=>e.n))];
+  if(names.length) {
+    const title = document.createElement("div");
+    title.className = "legend-section-title";
+    title.textContent = "Описание событий";
+    body.appendChild(title);
+
+    const cards = document.createElement("div"); cards.className="legend-cards";
+    names.forEach(n => {
+      const c2 = getColor(n);
+      const desc = getDesc(n);
+      const card = document.createElement("div"); card.className="lc";
+      card.innerHTML = `
+        <div class="lc-dot" style="background:${c2.bg};${c2.bg==="#D1D5DB"?"outline:1px solid #9CA3AF":""}"></div>
+        <div class="lc-text">
+          <div class="lc-name">${n}</div>
+          ${desc ? `<div class="lc-desc">${desc}</div>` : ""}
+        </div>`;
+      cards.appendChild(card);
+    });
+    body.appendChild(cards);
+  }
+}
+
+// ── Lightbox ──
+let lbPhotos=[], lbIdx=0;
+const lb=document.getElementById("lb");
+const lbWrap=document.getElementById("lbWrap");
+const lbDots=document.getElementById("lbDots");
+const lbCounter=document.getElementById("lbCounter");
+const lbPrev=document.getElementById("lbPrev");
+const lbNext=document.getElementById("lbNext");
+
+function openLightbox(photos,startIdx){
+  lbPhotos=photos; lbIdx=startIdx;
+  lb.classList.add("open");
+  renderLbImage();
+  document.addEventListener("keydown",lbKeyHandler);
+}
+function closeLightbox(){
+  lb.classList.remove("open");
+  document.removeEventListener("keydown",lbKeyHandler);
+}
+function renderLbImage(){
+  const old=lbWrap.querySelector(".lb-photo,.lb-placeholder"); if(old) old.remove();
+  const img=document.createElement("img"); img.className="lb-photo";
+  img.src=lbPhotos[lbIdx]; img.alt="";
+  img.onerror=()=>{ img.remove(); const ph=document.createElement("div"); ph.className="lb-placeholder"; ph.textContent="Фото недоступно"; lbWrap.appendChild(ph); };
+  lbWrap.appendChild(img);
+  lbDots.innerHTML="";
+  if(lbPhotos.length>1){
+    lbPhotos.forEach((_,i)=>{ const d=document.createElement("div"); d.className="lb-dot"+(i===lbIdx?" active":""); d.addEventListener("click",()=>{lbIdx=i;renderLbImage();}); lbDots.appendChild(d); });
+    lbCounter.textContent=(lbIdx+1)+" / "+lbPhotos.length;
+  } else { lbCounter.textContent=""; }
+  lbPrev.classList.toggle("hidden",lbPhotos.length<=1||lbIdx===0);
+  lbNext.classList.toggle("hidden",lbPhotos.length<=1||lbIdx===lbPhotos.length-1);
+}
+function lbKeyHandler(e){
+  if(e.key==="Escape") closeLightbox();
+  if(e.key==="ArrowLeft"&&lbIdx>0){lbIdx--;renderLbImage();}
+  if(e.key==="ArrowRight"&&lbIdx<lbPhotos.length-1){lbIdx++;renderLbImage();}
+}
+document.getElementById("lbClose").addEventListener("click",closeLightbox);
+lb.addEventListener("click",e=>{if(e.target===lb)closeLightbox();});
+lbPrev.addEventListener("click",()=>{if(lbIdx>0){lbIdx--;renderLbImage();}});
+lbNext.addEventListener("click",()=>{if(lbIdx<lbPhotos.length-1){lbIdx++;renderLbImage();}});
+</script>
+</body>
+</html>
