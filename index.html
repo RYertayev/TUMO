@@ -393,45 +393,16 @@ header{
 
 // ── Unified event color map (consistent across ALL zones) ──
 const EVT_MAP = [
-  { keys:["Рейды Pre Piscine","Pre Piscine GO","Pre Piscine"],  bg:"#2563EB", tx:"#fff" },
-  { keys:["LeetCode"],                                           bg:"#7C3AED", tx:"#fff" },
-  { keys:["Mentor Hours"],                                        bg:"#D97706", tx:"#fff" },
-  { keys:["Mentor Lecture"],                                     bg:"#B45309", tx:"#fff" },
-  { keys:["Mentor Session"],                                     bg:"#B45309", tx:"#fff" },
-  { keys:["Внутренняя лекция"],                      bg:"#0891B2", tx:"#fff" },
-  { keys:["Внутренняя лекция"],                                  bg:"#059669", tx:"#fff" },
-  { keys:["Free time","Свободное"],                              bg:"#D1D5DB", tx:"#374151" },
-  { keys:["Воркшоп","Воркшопы"],                                 bg:"#0369A1", tx:"#fff" },
-  { keys:["Check-In"],                                           bg:"#EA580C", tx:"#fff" },
-  { keys:["Meet up"],                                            bg:"#7E22CE", tx:"#fff" },
-  { keys:["Гостевая"],                                           bg:"#E11D48", tx:"#fff" },
-  { keys:["AI/ML","Office Hours AI","Часы работы AI"],           bg:"#4F46E5", tx:"#fff" },
-  { keys:["Office Hours"],                                       bg:"#4F46E5", tx:"#fff" },
-  { keys:["Лекции по AI"],                                       bg:"#4F46E5", tx:"#fff" },
-  { keys:["JavaScript Club"],                                    bg:"#CA8A04", tx:"#fff" },
-  { keys:["Golang Club"],                                        bg:"#0E7490", tx:"#fff" },
-  { keys:["React Club"],                                         bg:"#EA580C", tx:"#fff" },
-  { keys:["Soft Skills"],                                        bg:"#DB2777", tx:"#fff" },
-  { keys:["Guide Club"],                                         bg:"#4338CA", tx:"#fff" },
-  { keys:["Music Room","Music Jam"],                             bg:"#9333EA", tx:"#fff" },
-  { keys:["GameDev"],                                            bg:"#92400E", tx:"#fff" },
-  { keys:["English Club"],                                       bg:"#15803D", tx:"#fff" },
-  { keys:["Debate Club"],                                        bg:"#C2410C", tx:"#fff" },
-  { keys:["Asian Culture"],                                      bg:"#BE185D", tx:"#fff" },
-  { keys:["Social Media"],                                       bg:"#A16207", tx:"#fff" },
-  { keys:["Analysis Club"],                                      bg:"#047857", tx:"#fff" },
-  { keys:["Book Club"],                                          bg:"#6D28D9", tx:"#fff" },
-  { keys:["Board Games"],                                        bg:"#0F766E", tx:"#fff" },
-  { keys:["Киноклуб","Movie Club"],                              bg:"#1D4ED8", tx:"#fff" },
-  { keys:["Strategic Games"],                                    bg:"#475569", tx:"#fff" },
-  { keys:["Mandatory"],                                          bg:"#B91C1C", tx:"#fff" },
-  { keys:["Корпоративное"],                                      bg:"#0369A1", tx:"#fff" },
-  { keys:["Зона обучения"],                                      bg:"#64748B", tx:"#fff" },
-  { keys:["Kazakh Public","Казах"],                              bg:"#0284C7", tx:"#fff" },
-  { keys:["Лекция Pre Piscine"],                                 bg:"#2563EB", tx:"#fff" },
-  { keys:["Собрание старост"],                                   bg:"#1D4ED8", tx:"#fff" },
-  { keys:["Дайджест","Digest"],                                  bg:"#0D9488", tx:"#fff" },
-  { keys:["DSA","структур данных"],                              bg:"#9333EA", tx:"#fff" },
+  { keys:["LG1"],  bg:"#D98C8C", tx:"#fff" },
+  { keys:["LG2"],  bg:"#B06A8C", tx:"#fff" },
+  { keys:["LG3"],  bg:"#9C4F7A", tx:"#fff" },
+  { keys:["LG4"],  bg:"#E6CF8B", tx:"#fff" },
+  { keys:["LG5"],  bg:"#E6B633", tx:"#fff" },
+  { keys:["LG6"],  bg:"#C99A00", tx:"#fff" },
+  { keys:["Staff members"],  bg:"#3B82F6", tx:"#fff" },
+  { keys:["Wardrobe"],  bg:"#3B82F6", tx:"#fff" },
+  { keys:["Cafeteria"],  bg:"#3B82F6", tx:"#fff" },
+  { keys:["InfoDesk"],  bg:"#3B82F6", tx:"#fff" }
 ];
 
 function getColor(n) {
@@ -442,54 +413,7 @@ function getColor(n) {
 }
 
 // ── Event descriptions ──
-const EVT_DESC = {
-  "Mentor Hours":                   "Консультационные часы, где менторы работают со своими менти: помогают с обучением, разбирают сложные темы и отвечают на вопросы. Доступны в дневное и вечернее время — на выбор для работающих и неработающих студентов.",
-  "Mentor Lecture":                "Лекции от менторов по ключевым темам программирования и AI с разбором практических кейсов.",
-  "Mentor Session":                "Консультационные часы: менторы помогают ментам с обучением, разбирают проблемы и решают вопросы.",
-  "JavaScript Club":               "Студенческий клуб по основам веб-разработки: HTML, CSS и JS для создания сайтов и проектов.",
-  "Golang Club":                   "Студенческий клуб по основам программирования и разработки на Go.",
-  "Воркшопы по AI/ML":             "Обязательные практические занятия по AI и ML для первых трёх когорт, с разбором кейсов и выполнением заданий.",
-  "Лекции по AI/ML":               "Обязательные теоретические занятия по AI и ML для первых трёх когорт, с разбором кейсов и демонстрацией практических решений.",
-  "Movie Club":                    "Студенческий клуб по просмотру и совместному обсуждению фильмов.",
-  "Собрание старост":              "Встреча старост для обсуждения вопросов студентов и координации клубов.",
-  "Free time":                     "Свободное время для самостоятельного обучения и работы над проектами.",
-  "Внутренняя лекция":             "Лекции от студентов для студентов: обмен опытом, разбор проектов и публичные выступления.",
-  "Office Hours AI/ML":            "Консультационные часы по AI/ML: разбор вопросов и сложных тем с наставниками.",
-  "Корпоративное обучение":        "Обучение между коллегами по разным темам для профессионального и технического развития.",
-  "English Club":                  "Студенческий клуб по изучению английского языка через интерактивные форматы.",
-  "LeetCode":                      "Трёхмесячный челлендж по программированию среди студентов: ежедневные тренировки по алгоритмам и структурам данных.",
-  "Зона обучения для Core":        "Зона для самостоятельной работы студентов Core обучения",
-  "Зона обучения для Piscine":     "Зона для самостоятельной работы студентов Piscine.",
-  "Pre-Piscine GO":                "Двухмесячный курс, где люди без бэкграунда могут подготовиться к бассейну по Go.",
-  "Лекция Pre Piscine GO":         "Двухмесячный теоретический курс для участников без опыта программирования, направленный на освоение базовых концепций и синтаксиса Go в формате лекций.",
-  "Воркшоп Pre Piscine GO":        "Практические занятия для закрепления знаний, отработки синтаксиса и выполнения упражнений на Go, предназначенные для участников без опыта программирования.",
-  "Рейды Pre Piscine":             "Ревью проектов студентов Pre Piscine от coding-менторов с совместным разбором задач и ускорением прогресса.",
-  "AI Club Practicum":             "Студенческий клуб по применению Python для анализа данных и превращению «сырых» данных в понятные выводы.",
-  "Analysis Club":                 "Студенческий клуб по бизнес-анализу и изучению бизнес-процессов.",
-  "Asian Culture Club":            "Активное сообщество участников, заинтересованных в изучении азиатской культуры.",
-  "Peer-to-peer разборы":          "Совместный разбор заданий и проектов студентами с взаимной проверкой и обучением друг друга.",
-  "GameDev Club":                  "Студенческий клуб ценителей видеоигровой индустрии: обсуждение и изучение игр.",
-  "Debate Club":                   "Студенческий клуб, направленный на развитие критического мышления.",
-  "Strategic Games Tutorials":     "Обучение настольным играм: шахматы, го, гомоку, рэндзю.",
-  "Music Jam Club":                "Студенческий клуб для музыкального творчества и совместных джем-сессий.",
-  "Social Media Club":             "Студенческий клуб, посвящённый обсуждению преимуществ и недостатков использования социальных сетей.",
-  "Soft Skills Club":              "Cтуденческий клуб, где участники разыгрывают разнообразные кейсы и развивают ключевые софт-скиллы.",
-  "React Club":                    "Студенческий клуб по изучению основ React с нуля.",
-  "Kazakh Public Speaking":        "Обучение мастерству публичных выступлений на казахском языке.",
-  "Guide Club":                    "Студенческий клуб с лайфхаками, разбором задач по Golang, IT-инструментам и обсуждением технологий Big Tech компаний.",
-  "Тематические турниры":          "Неформальные соревнования для нетворкинга, вовлечения и укрепления комьюнити.",
-  "Music Room":                    "Пространство для студентов, увлекающихся игрой на музыкальных инструментах, созданное для творческого самовыражения.",
-  "Mandatory FullStack Audits Room": "Пространство для обязательной проверки проектов студентов по направлению FullStack.",
-  "Mandatory AI Audits Room":      "Пространство для обязательной проверки проектов студентов по направлению AI.",
-  "Гостевая лекция": "Выступление приглашенного профильного эксперта, направленное на передачу практического опыта, кейсов и актуальных рыночных компетенций учащимся.",
-  "Check-In ивент": "Мероприятие для приветствия новых студентов, презентации школы, знакомства с программой обучения, открывающее новый поток обучения.",
-  "Meet up для новых студентов Core": "Организационное собрание для учащихся основного этапа обучения (Core), посвященное детальному разбору учебного плана, правил взаимодействия и методологии образовательного процесса.",
-  "Office Hours AI/ML": "Консультационные часы по AI/ML: разбор вопросов и сложных тем с наставниками.",
-  "Дайджест новостей в сфере IT и AI": "Еженедельный регулярный обзор актуальных новостей, трендов и технологий в индустрии от студентов.",
-  "Data Structures and Algorithms Club": "Студенческий клуб по изучению структур данных и алгоритмов.",
-  "Book Club": "Студенческий клуб по совместному чтению и обсуждению книг.",
-  "Board Games Club": "Студенческий клуб по настольным играм для развития стратегического мышления и командного взаимодействия.",
-};
+
 
 function getDesc(n) {
   for (const [k, v] of Object.entries(EVT_DESC))
@@ -500,41 +424,84 @@ function getDesc(n) {
 const ZONES = {
   self_zone: {
     name: "Self Learning Zone", shortName: "Self-Learning Zone", type: "self_zone", color: "#ffff0f",
-    cx:1700, cy:1300, r:46, seats:24, juneNote:false,
-    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/amfi1.jpg","https://raw.githubusercontent.com/nargizskakova-04/g/main/amfi2.jpg","https://raw.githubusercontent.com/nargizskakova-04/g/main/amfi3.jpg"],
+    cx:1700, cy:1300, r:60, seats:24, juneNote:false,
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/2th_floor.jpg"],
     events:[
-      {d:0,s:10,e:18,n:"Self Learning Time"},
-      {d:1,s:10,e:18,n:"Self Learning Time"},
-      {d:3,s:10,e:18,n:"Self Learning Time"},
-      {d:4,s:10,e:18,n:"Self Learning Time"},
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
     ]
   },
   self_zone2: {
-    name: "Self Learning Zone", shortName: "Self-Learning Zone", type: "self_zone", color: "#ffff0f",
-    cx:1200, cy:1400, r:46, seats:24, juneNote:false,
-    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/amfi1.jpg","https://raw.githubusercontent.com/nargizskakova-04/g/main/amfi2.jpg","https://raw.githubusercontent.com/nargizskakova-04/g/main/amfi3.jpg"],
+    name: "TUMObile", shortName: "TUMObile", type: "self_zone", color: "#ffff0f",
+    cx:1200, cy:1400, r:60, seats:17, juneNote:false,
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/2th_floor.jpg"],
     events:[
-      {d:0,s:10,e:18,n:"Self Learning Time"},
-      {d:1,s:10,e:18,n:"Self Learning Time"},
-      {d:3,s:10,e:18,n:"Self Learning Time"},
-      {d:4,s:10,e:18,n:"Self Learning Time"},
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+    ]
+  },
+  self_zone3: {
+    name: "Inflatable Seats", shortName: "Inflatable Seats", type: "self_zone", color: "#ffff0f",
+    cx:1300, cy:1600, r:60, seats:20, juneNote:false,
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/2th_floor.jpg"],
+    events:[
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
     ]
   },
   comp1: {
     name:"Robotics room 1", shortName:"Robotics WS", type:"comp", color:"#C96FA8",
-    cx:1450, cy:400, r:38, seats:16, juneNote:true,
-    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/comp1.jpg"],
+    cx:1450, cy:400, r:60, seats:16, juneNote:true,
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/robotics_zone.jpg"],
     events:[
-      {d:0,s:10,e:18,n:"Зона обучения для робототехники"},
-      {d:1,s:10,e:18,n:"Зона обучения для робототехники"},
-      {d:3,s:10,e:18,n:"Зона обучения для робототехники"},
-      {d:4,s:10,e:18,n:"Зона обучения для робототехники"},
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" }
     ]
   },
   InfoDesk: {
     name:"InfoDesk", shortName:"InfoDesk", type:"meet", color:"#3B82F6",
-    cx:1000, cy:600, r:34, seats:10, juneNote:false,
-    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/meet4.06.jpg"],
+    cx:1000, cy:600, r:60, seats:10, juneNote:false,
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/infodesk.jpg", "https://raw.githubusercontent.com/RYertayev/TUMO/main/infodesk%20(1).jpg"],
     events:[
       {d:0,s:10, e:18,n:"InfoDesk"},
       {d:1,s:10, e:18,n:"InfoDesk"},
@@ -544,8 +511,8 @@ const ZONES = {
   },
   cafe1: {
     name:"Cafeteria", shortName:"Cafeteria", type:"cafe", color:"#3B82F6",
-    cx:600, cy:1570, r:34, seats:10, juneNote:false,
-    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/meet4.04.jpg"],
+    cx:600, cy:1570, r:60, seats:28, juneNote:false,
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/IMG_0037.jpg"],
     events: [
       {d: 0, s: 10, e: 18, n: "Cafeteria"},
       {d: 1, s: 10, e: 18, n: "Cafeteria"},
@@ -553,48 +520,503 @@ const ZONES = {
       {d: 4, s: 10, e: 18, n: "Cafeteria"},
     ]
   },
-  
   comp2: {
     name:"Musical Studio", shortName:"Mus. Studio", type:"music", color:"#06B6D4",
-    cx:519, cy:651, r:34, seats:12, juneNote:false,
-    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/conf1.jpg","https://raw.githubusercontent.com/nargizskakova-04/g/main/conf2.jpg"],
+    cx:350, cy:651, r:60, seats:12, juneNote:false,
+    photos:[""],
     events: [
-      {d: 0, s: 10, e: 18, n: "Musical Club"},
-      {d: 1, s: 10, e: 18, n: "Musical Club"},
-      {d: 3, s: 10, e: 18, n: "Musical Club"},
-      {d: 4, s: 10, e: 18, n: "Musical Club"},
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
     ]
   },
   wardrobe: {
     name:"Wardrobe room", shortName:"Wardrobe", type:"wardrobe", color:"#06B6D4",
-    cx:650, cy:651, r:34,  juneNote:false,
-    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/conf1.jpg","https://raw.githubusercontent.com/nargizskakova-04/g/main/conf2.jpg"],
+    cx:530, cy:651, r:60,  juneNote:false,
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/wardrobe.jpg"],
     events: [
       {d: 0, s: 10, e: 18, n: "Wardrobe"},
       {d: 1, s: 10, e: 18, n: "Wardrobe"},
       {d: 3, s: 10, e: 18, n: "Wardrobe"},
       {d: 4, s: 10, e: 18, n: "Wardrobe"},
     ]
-  },
-  comp3: {
-    name:"Robotics room 1", shortName:"Robotics WS", type:"comp", color:"#C96FA8",
-    cx:1450, cy:2450, r:38, seats:16, juneNote:true,
-    photos:["https://raw.githubusercontent.com/nargizskakova-04/g/main/comp1.jpg"],
-    events:[
-      {d:0,s:10,e:18,n:"Зона обучения для робототехники"},
-      {d:1,s:10,e:18,n:"Зона обучения для робототехники"},
-      {d:3,s:10,e:18,n:"Зона обучения для робототехники"},
-      {d:4,s:10,e:18,n:"Зона обучения для робототехники"},
-    ]
   }
+};
+
+const ZONES2 = {
+  comp4: {
+    name: "Workshop room 3",
+    shortName: "Workshop room 3",
+    type: "comp",
+    color: "#C96FA8",
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/workshop_3_4_5.jpg","https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room3.jpg", "https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room2.jpg", "http://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room.jpg"],
+    cx: 650,
+    cy: 700,
+    r: 60,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+    ]
+  },
+  comp5: {
+    name: "Workshop room 4",
+    shortName: "Workshop room 4",
+    type: "comp",
+    color: "#C96FA8",
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/workshop_3_4_5.jpg","https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room3.jpg", "https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room2.jpg", "http://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room.jpg"],
+    cx: 450,
+    cy: 800,
+    r: 60,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+
+    ]
+  },
+  comp6: {
+    name: "Workshop room 5",
+    shortName: "Workshop room 5",
+    type: "comp",
+    color: "#C96FA8",
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/workshop_3_4_5.jpg","https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room3.jpg", "https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room2.jpg", "http://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room.jpg"],
+    cx: 250,
+    cy: 1000,
+    r: 60,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+
+    ]
+  },
+  comp7: {
+    name: "Workshop room 6",
+    shortName: "Workshop room 6",
+    type: "comp",
+    color: "#C96FA8",
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/workshop_3_4_5.jpg","https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room3.jpg", "https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room2.jpg", "http://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room.jpg"],
+    cx: 400,
+    cy: 1150,
+    r: 60,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+
+    ]
+  },
+  comp8: {
+    name: "Workshop room 7",
+    shortName: "Workshop room 7",
+    type: "comp",
+    color: "#C96FA8",
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/workshop_3_4_5.jpg","https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room3.jpg", "https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room2.jpg", "http://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room.jpg"],
+    cx: 400,
+    cy: 1350,
+    r: 60,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+
+    ]
+  },
+  comp9: {
+    name: "Workshop room 8",
+    shortName: "Workshop room 8",
+    type: "comp",
+    color: "#C96FA8",
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/workshop_3_4_5.jpg","https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room3.jpg", "https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room2.jpg", "http://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room.jpg"],
+    cx: 600,
+    cy: 1450,
+    r: 60,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+
+    ]
+  },
+  comp9: {
+    name: "Workshop room 8",
+    shortName: "Workshop room 8",
+    type: "comp",
+    color: "#C96FA8",
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/workshop_3_4_5.jpg","https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room3.jpg", "https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room2.jpg", "http://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room.jpg"],
+    cx: 600,
+    cy: 1450,
+    r: 60,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+
+    ]
+  },
+  comp10: {
+    name: "Workshop room 9",
+    shortName: "Workshop room 9",
+    type: "comp",
+    color: "#C96FA8",
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/workshop_3_4_5.jpg","https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room3.jpg", "https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room2.jpg", "http://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room.jpg"],
+    cx: 1100,
+    cy: 1250,
+    r: 60,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+
+    ]
+  },
+  comp11: {
+    name: "Lab room",
+    shortName: "Lab room",
+    type: "comp",
+    color: "#C96FA8",
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/workshop_3_4_5.jpg","https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room3.jpg", "https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room2.jpg", "http://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room.jpg"],
+    cx: 1350,
+    cy: 1500,
+    r: 60,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+
+    ]
+  },
+  comp12: {
+    name: "Workshop room 12",
+    shortName: "Workshop room 12",
+    type: "comp",
+    color: "#C96FA8",
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/workshop_3_4_5.jpg","https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room3.jpg", "https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room2.jpg", "http://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room.jpg"],
+    cx: 1700,
+    cy: 1050,
+    r: 60,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+
+    ]
+  },
+  comp13: {
+    name: "Workshop room 13",
+    shortName: "Workshop room 13",
+    type: "comp",
+    color: "#C96FA8",
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/workshop_3_4_5.jpg","https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room3.jpg", "https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room2.jpg", "http://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room.jpg"],
+    cx: 1700,
+    cy: 800,
+    r: 60,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+
+    ]
+  },
+  comp14: {
+    name: "Workshop room 14",
+    shortName: "Workshop room 14",
+    type: "comp",
+    color: "#C96FA8",
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/workshop_3_4_5.jpg","https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room3.jpg", "https://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room2.jpg", "http://raw.githubusercontent.com/RYertayev/TUMO/main/ws_room.jpg"],
+    cx: 1500,
+    cy: 600,
+    r: 60,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+
+    ]
+  },
+  kitchen: {
+    name: "Kitchen room",
+    shortName: "Kitchen room",
+    type: "cafe",
+    color: "#3B82F6",
+    photos:[""],
+    cx: 1240,
+    cy: 550,
+    r: 60,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 18, n: "Staff members" },
+      { d: 1, s: 10, e: 18, n: "Staff members" },
+      { d: 3, s: 10, e: 18, n: "Staff members" },
+      { d: 4, s: 10, e: 18, n: "Staff members" },
+    ]
+  },
+  WL_LC_room: {
+    name: "WL and LC room",
+    shortName: "WL and LC room",
+    type: "meet",
+    color: "red",
+    photos:[""],
+    cx: 1370,
+    cy: 500,
+    r: 60,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 18, n: "Workshop Leaders and Learning Coaches" },
+      { d: 1, s: 10, e: 18, n: "Workshop Leaders and Learning Coaches" },
+      { d: 3, s: 10, e: 18, n: "Workshop Leaders and Learning Coaches" },
+      { d: 4, s: 10, e: 18, n: "Workshop Leaders and Learning Coaches" },
+    ]
+  },
+  staff_room: {
+    name: "Center Management",
+    shortName: "Center Management",
+    type: "meet",
+    color: "black",
+    photos:[""],
+    cx: 1500,
+    cy: 400,
+    r: 60,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 18, n: "Staff members" },
+      { d: 1, s: 10, e: 18, n: "Staff members" },
+      { d: 3, s: 10, e: 18, n: "Staff members" },
+      { d: 4, s: 10, e: 18, n: "Staff members" }
+    ]
+  },
+  self_learning_zone1: {
+    name: "Self Learning Zone",
+    shortName: "Self Learning Zone",
+    type: "self_zone",
+    color: "yellow",
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/self%20learning%20zone.jpg"],
+    cx: 1500,
+    cy: 1400,
+    r: 50,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+    ]
+  },
+  self_learning_zone2: {
+    name: "Self Learning Zone",
+    shortName: "Self Learning Zone",
+    type: "self_zone",
+    color: "yellow",
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/self%20learning%20zone.jpg"],
+    cx: 1500,
+    cy: 1200,
+    r: 50,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+    ]
+  },
+  self_learning_zone3: {
+    name: "Self Learning Zone",
+    shortName: "Self Learning Zone",
+    type: "self_zone",
+    color: "yellow",
+    photos:["https://raw.githubusercontent.com/RYertayev/TUMO/main/self%20learning%20zone.jpg"],
+    cx: 1650,
+    cy: 1250,
+    r: 50,
+    seats: 16,
+    juneNote: false,
+    events: [
+      { d: 0, s: 10, e: 12, n: "LG1" },
+      { d: 0, s: 14, e: 16, n: "LG2" },
+      { d: 0, s: 16, e: 18, n: "LG3" },
+      { d: 1, s: 10, e: 12, n: "LG4" },
+      { d: 1, s: 14, e: 16, n: "LG5" },
+      { d: 1, s: 16, e: 18, n: "LG6" },
+      { d: 3, s: 10, e: 12, n: "LG1" },
+      { d: 3, s: 14, e: 16, n: "LG2" },
+      { d: 3, s: 16, e: 18, n: "LG3" },
+      { d: 4, s: 10, e: 12, n: "LG4" },
+      { d: 4, s: 14, e: 16, n: "LG5" },
+      { d: 4, s: 16, e: 18, n: "LG6" },
+    ]
+  },
 };
 
 const HS=9, HE=21, SH=38, DAYS=["Пн","Вт","Ср","Чт","Пт"];
 const zg = document.getElementById("zg");
+const zg2 = document.getElementById("zg2");
 let activeG = null, curId = null;
 const PLACEHOLDER_SVG = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.3"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="m21 15-5-5L5 19"/></svg>`;
 
-const ICONS = {self_zone:"🧠", comp:"💻", meet:"📋", conf:"📋", music: " 𝄞", cafe: "🍽️", wardrobe: "🧥"};
+const ICONS = {self_zone:"🧠", comp:"💻", meet:"📋", conf:"📋", music: " 𝄞", cafe: "🍽️", wardrobe: "🧥", kitchen: "👩🏻‍🍳"};
 
 Object.entries(ZONES).forEach(([id, z]) => {
   const g = document.createElementNS("http://www.w3.org/2000/svg","g");
@@ -616,7 +1038,7 @@ Object.entries(ZONES).forEach(([id, z]) => {
   const ico = document.createElementNS("http://www.w3.org/2000/svg","text");
   ico.setAttribute("x",z.cx); ico.setAttribute("y",z.cy+1);
   ico.setAttribute("text-anchor","middle"); ico.setAttribute("dominant-baseline","middle");
-  ico.style.fontSize = (z.r*0.68)+"px"; ico.style.pointerEvents="none";
+  ico.style.fontSize = (z.r*1)+"px"; ico.style.pointerEvents="none";
   ico.textContent = ICONS[z.type]||"●";
   g.appendChild(ico);
 
@@ -624,7 +1046,7 @@ Object.entries(ZONES).forEach(([id, z]) => {
   lbl.classList.add("zone-tag");
   lbl.setAttribute("x",z.cx); lbl.setAttribute("y",z.cy+z.r+6);
   const words = z.shortName.split(" ");
-  if(words.length<=2){ lbl.textContent=z.shortName; lbl.style.fontSize="11px"; }
+  if(words.length<=2){ lbl.textContent=z.shortName; lbl.style.fontSize="25px"; }
   else {
     const ts1=document.createElementNS("http://www.w3.org/2000/svg","tspan");
     ts1.setAttribute("x",z.cx); ts1.setAttribute("dy","0"); ts1.textContent=words.slice(0,2).join(" ");
@@ -648,9 +1070,147 @@ Object.entries(ZONES).forEach(([id, z]) => {
   zg.appendChild(g);
 });
 
+Object.entries(ZONES2).forEach(([id, z]) => {
+  const g = document.createElementNS("http://www.w3.org/2000/svg","g");
+  g.classList.add("zone-group");
+
+  const shadow = document.createElementNS("http://www.w3.org/2000/svg","circle");
+  shadow.setAttribute("cx",z.cx+2); shadow.setAttribute("cy",z.cy+3);
+  shadow.setAttribute("r",z.r+2); shadow.setAttribute("fill","rgba(0,0,0,0.14)");
+  g.appendChild(shadow);
+
+  const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+  c.classList.add("zone-circle");
+  c.setAttribute("cx",z.cx); c.setAttribute("cy",z.cy);
+  c.setAttribute("r",z.r); c.setAttribute("fill",z.color);
+  c.setAttribute("stroke","#fff"); c.setAttribute("stroke-width","3");
+  c.setAttribute("opacity","0.93");
+  g.appendChild(c);
+
+  const ico = document.createElementNS("http://www.w3.org/2000/svg","text");
+  ico.setAttribute("x",z.cx); ico.setAttribute("y",z.cy+1);
+  ico.setAttribute("text-anchor","middle"); ico.setAttribute("dominant-baseline","middle");
+  ico.style.fontSize = (z.r*1)+"px"; ico.style.pointerEvents="none";
+  ico.textContent = ICONS[z.type]||"●";
+  g.appendChild(ico);
+
+  const lbl = document.createElementNS("http://www.w3.org/2000/svg","text");
+  lbl.classList.add("zone-tag");
+  lbl.setAttribute("x",z.cx); lbl.setAttribute("y",z.cy+z.r+6);
+  const words = z.shortName.split(" ");
+  if(words.length<=3){ lbl.textContent=z.shortName; lbl.style.fontSize="25px"; }
+  else {
+    const ts1=document.createElementNS("http://www.w3.org/2000/svg","tspan");
+    ts1.setAttribute("x",z.cx); ts1.setAttribute("dy","0"); ts1.textContent=words.slice(0,2).join(" ");
+    const ts2=document.createElementNS("http://www.w3.org/2000/svg","tspan");
+    ts2.setAttribute("x",z.cx); ts2.setAttribute("dy","13"); ts2.textContent=words.slice(2).join(" ");
+    lbl.appendChild(ts1); lbl.appendChild(ts2); lbl.style.fontSize="25px";
+  }
+  g.appendChild(lbl);
+
+  const hit = document.createElementNS("http://www.w3.org/2000/svg","rect");
+  hit.setAttribute("x",z.cx-z.r-30); hit.setAttribute("y",z.cy-z.r-5);
+  hit.setAttribute("width",z.r*2+60); hit.setAttribute("height",z.r*2+55);
+  hit.setAttribute("fill","transparent");
+  g.insertBefore(hit,shadow);
+
+  g.addEventListener("click",()=>{
+    if(activeG) activeG.classList.remove("active");
+    activeG=g; g.classList.add("active");
+    curId=id; renderSchedule2();
+  });
+  zg2.appendChild(g);
+});
+
+
 function renderSchedule() {
   if(!curId) return;
   const z = ZONES[curId];
+  document.getElementById("zname").textContent = z.name;
+  document.getElementById("zdesc").textContent = z.events.length ? z.events.length+" событий на неделе" : "Нет событий на этой неделе";
+  document.getElementById("zbadge").style.background = z.color;
+
+  // June note
+  const juneNote = document.getElementById("juneNote");
+  if(z.juneNote) juneNote.classList.add("visible");
+  else juneNote.classList.remove("visible");
+
+  const strip = document.getElementById("zPhotos");
+  strip.innerHTML = "";
+  (z.photos||[]).forEach((src,idx) => {
+    const box = document.createElement("div");
+    box.className = "photo-box";
+    const img = document.createElement("img");
+    img.src = src; img.alt = "";
+    img.onerror = () => { box.innerHTML = PLACEHOLDER_SVG; box.onclick = null; };
+    box.appendChild(img);
+    box.addEventListener("click", () => openLightbox(z.photos, idx));
+    strip.appendChild(box);
+  });
+
+  document.getElementById("zSeats").textContent = z.seats ?? "—";
+  document.getElementById("zinfo").classList.add("visible");
+
+  const body = document.getElementById("sbody");
+  body.innerHTML = "";
+
+  // Grid
+  const grid = document.createElement("div"); grid.className="wg";
+  const corner = document.createElement("div"); corner.className="gh tc"; grid.appendChild(corner);
+  DAYS.forEach(d=>{
+    const h=document.createElement("div"); h.className="gh"; h.textContent=d; grid.appendChild(h);
+  });
+
+  const tc = document.createElement("div"); tc.className="tc";
+  for(let h=HS;h<HE;h++){
+    const s=document.createElement("div"); s.className="ts"; s.textContent=h+":00"; tc.appendChild(s);
+  }
+  grid.appendChild(tc);
+
+  for(let di=0;di<5;di++){
+    const col=document.createElement("div"); col.className="dc";
+    for(let h=HS;h<HE;h++){
+      const s=document.createElement("div"); s.className="sl"; col.appendChild(s);
+    }
+    z.events.filter(e=>e.d===di).forEach(ev=>{
+      const top=(ev.s-HS)*SH+2, height=(ev.e-ev.s)*SH-4, c2=getColor(ev.n);
+      const el=document.createElement("div"); el.className="ev";
+      el.style.cssText=`top:${top}px;height:${height}px;background:${c2.bg}`;
+      el.innerHTML=`<div class="ev-n" style="color:${c2.tx}">${ev.n}</div><div class="ev-t" style="color:${c2.tx}">${ev.s}:00–${ev.e}:00</div>`;
+      col.appendChild(el);
+    });
+    grid.appendChild(col);
+  }
+  body.appendChild(grid);
+
+  // Legend cards
+  const names = [...new Set(z.events.map(e=>e.n))];
+  if(names.length) {
+    const title = document.createElement("div");
+    title.className = "legend-section-title";
+    title.textContent = "Описание событий";
+    body.appendChild(title);
+
+    const cards = document.createElement("div"); cards.className="legend-cards";
+    names.forEach(n => {
+      const c2 = getColor(n);
+      const desc = getDesc(n);
+      const card = document.createElement("div"); card.className="lc";
+      card.innerHTML = `
+        <div class="lc-dot" style="background:${c2.bg};${c2.bg==="#D1D5DB"?"outline:1px solid #9CA3AF":""}"></div>
+        <div class="lc-text">
+          <div class="lc-name">${n}</div>
+          ${desc ? `<div class="lc-desc">${desc}</div>` : ""}
+        </div>`;
+      cards.appendChild(card);
+    });
+    body.appendChild(cards);
+  }
+}
+
+function renderSchedule2() {
+  if(!curId) return;
+  const z = ZONES2[curId];
   document.getElementById("zname").textContent = z.name;
   document.getElementById("zdesc").textContent = z.events.length ? z.events.length+" событий на неделе" : "Нет событий на этой неделе";
   document.getElementById("zbadge").style.background = z.color;
